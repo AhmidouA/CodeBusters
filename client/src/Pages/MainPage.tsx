@@ -103,10 +103,13 @@ const MainPage = () => {
 
   const handleAddressSelect = (coords: [number, number]) => {
     setDestinationLocation(coords);
+  };
+
+  useEffect(() => {
     if(destinationLocation){
       setMapCenter(destinationLocation);
       
-      fetch(`http://localhost:3001/api/station?latitude=${coords[0]}&longitude=${coords[1]}&radius=${distance}`)
+      fetch(`http://localhost:3001/api/station?latitude=${destinationLocation[0]}&longitude=${destinationLocation[1]}&radius=${distance}`)
          .then(res => res.json())
          .then(res => {
           setParkingList(res.stations);
@@ -118,8 +121,7 @@ const MainPage = () => {
 
         });
     }
-    
-  };
+  }, [destinationLocation])
 
   const handleClickMarker = (id: string) => {
     fetch(`http://localhost:3001/api/station/${id}`)
