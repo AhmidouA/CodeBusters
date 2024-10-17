@@ -1,13 +1,15 @@
 // LIBRARIES
 import React, { useState } from 'react';
-import { TextField, Checkbox, FormControlLabel, Slider, Button, Box, Typography } from '@mui/material';
+import { Checkbox, Slider, Typography, SvgIcon, FormControlLabel } from '@mui/material';
+import AccessibleIcon from '@mui/icons-material/Accessible';
+import LocalParkingIcon from '@mui/icons-material/LocalParking';
+import PedalBikeIcon from '@mui/icons-material/PedalBike';
 // COMPONENT
 import SearchBar from './SearchBar';
 // STYLE
 import '../Style/UIComponent.css';
 
 const UIComponent = (props:any) => {
-
 
   return (
     <div className='search-menu UI-Element' >
