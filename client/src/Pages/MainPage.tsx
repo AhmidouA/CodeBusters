@@ -35,7 +35,6 @@ interface StateToaster extends SnackbarOrigin {
 const MainPage = () => {
   
   const [mapCenter, setMapCenter] = useState<[number, number]>([43.62505, 3.862038]);
-  const [userLocation, setUserLocation]= useState<[number, number]>();
   const [destinationLocation, setDestinationLocation] = useState<[number,number]>();
   const [stateToaster, setStateToaster] = useState<StateToaster>({
     open: false,
@@ -97,38 +96,6 @@ const MainPage = () => {
   const handleCloseToast = () => {
     setStateToaster({ ...stateToaster, open: false });
   };
-  
-
-  const success = (position:  GeolocationPosition) => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    setUserLocation([latitude, longitude]);
-  }
-  
-  const error = () => {
-    console.log("Unable to retrieve your location");
-  }
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      const updateLocation = () => {
-        navigator.geolocation.getCurrentPosition(success, error);
-      };
-
-      // update location when mount
-      updateLocation();
-      if(userLocation){
-        setMapCenter(userLocation);
-      }
-      
-      // update userLocation every seconds
-      const intervalId = setInterval(updateLocation, 5000);
-
-      return () => clearInterval(intervalId);
-    } else {
-      console.log("Geolocation not supported");
-    }
-  }, []);
 
   useEffect(()=>{
     setTypeStation(bike ? 'BIKE': 'CAR')
@@ -179,11 +146,7 @@ const MainPage = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      { userLocation &&
-        <Marker position={userLocation}>
-          <Popup>C'est vous</Popup>
-        </Marker>
-      }
+      
       { destinationLocation &&
         <Marker position={destinationLocation} icon={finishIcon}>
           <Popup>
