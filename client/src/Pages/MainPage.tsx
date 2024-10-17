@@ -67,26 +67,23 @@ const MainPage = () => {
   const bikeIcon = new Icon ({
     iconUrl : '/bike.svg',
     iconSize : [35,35],
-    iconAnchor : [22,94], // point de l'icône qui correspondra à l'emplacement du marqueur
-    popupAnchor : [-3, -76] // point à partir duquel la fenêtre popup doit s'ouvrir par rapport à l'iconAnchor
-
-  })
-
+    iconAnchor : [17, 35], // Center-bottom for a 35x35 icon
+    popupAnchor : [0, -35] // Adjust popup anchor based on new iconAnchor
+  });
+  
   const finishIcon = new Icon ({
     iconUrl : '/finish.svg',
     iconSize : [35,35],
-    iconAnchor : [22,94],
-    popupAnchor : [-3, -76]
-
-  })
-
+    iconAnchor : [17, 35], // Center-bottom
+    popupAnchor : [0, -35]
+  });
+  
   const parkingIcon = new Icon ({
     iconUrl : '/parking.svg',
     iconSize : [35,35],
-    iconAnchor : [22,94],
-    popupAnchor : [-3, -76]
-
-  })
+    iconAnchor : [17, 35], // Center-bottom
+    popupAnchor : [0, -35]
+  });
     /*****************************/
 
   const handleClickToast = (newState: SnackbarOrigin) => () => {
@@ -96,7 +93,7 @@ const MainPage = () => {
   const handleCloseToast = () => {
     setStateToaster({ ...stateToaster, open: false });
   };
-
+  
   useEffect(()=>{
     setTypeStation(bike ? 'BIKE': 'CAR')
   }, [bike])
@@ -148,7 +145,7 @@ const MainPage = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      
+
       { destinationLocation &&
         <Marker position={destinationLocation} icon={finishIcon}>
           <Popup>
